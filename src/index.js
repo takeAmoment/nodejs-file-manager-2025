@@ -1,7 +1,27 @@
-import { argv, exit } from 'process'
+import { argv, stdin, stdout } from 'process'
+import readline from 'readline'
 
 import { USERNAME_PREFIX, USERNAME_ERROR, COMMON_ERROR } from './constants/constants.js'
 import { showGreeting } from './utils/showGreeting.js'
+import { showFarewellPhrase } from './utils/showFarewellPhrase.js'
+
+const rl = readline.createInterface({
+  input: stdin,
+  output: stdout
+})
+
+const closeProcess = (username) => {
+  showFarewellPhrase(username)
+}
+
+const handleCommand = (data, userName) => {
+  const formatedData = data.toString().trim().replace(/\s+/g, ' ')
+
+  if (formatedData === '.exit') {
+    rl.close()
+  }
+}
+
 
 const startProgram = () => {
   try {
@@ -13,6 +33,15 @@ const startProgram = () => {
 
     const formattedUsername = username.slice(0, 1).toUpperCase() + username.slice(1).toLowerCase()
     showGreeting(formattedUsername)
+
+    // listen to command
+    rl.on('line', (input) => {
+      handleCommand(input, formattedUsername)
+    })
+
+    rl.on('close', () => {
+      closeProcess(formattedUsername)
+    })
     
   } catch (error) {
     throw new Error(`${COMMON_ERROR} Detailed info: ${error.message}`)
