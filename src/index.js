@@ -1,14 +1,19 @@
-import { argv, stdin, stdout } from 'process'
+import { argv, stdin, stdout, cwd } from 'process'
 import readline from 'readline'
+import os from 'os'
 
 import { USERNAME_PREFIX, USERNAME_ERROR, COMMON_ERROR } from './constants/constants.js'
 import { showGreeting } from './utils/showGreeting.js'
 import { showFarewellPhrase } from './utils/showFarewellPhrase.js'
+import { printCurrentWorkingDir } from './utils/printCurrentWrkingDir.js'
 
 const rl = readline.createInterface({
   input: stdin,
   output: stdout
 })
+
+const homeDir = os.homedir();
+process.chdir(homeDir);
 
 const closeProcess = (username) => {
   showFarewellPhrase(username)
@@ -20,6 +25,7 @@ const handleCommand = (data, userName) => {
   if (formatedData === '.exit') {
     rl.close()
   }
+  printCurrentWorkingDir(cwd())
 }
 
 
@@ -33,6 +39,7 @@ const startProgram = () => {
 
     const formattedUsername = username.slice(0, 1).toUpperCase() + username.slice(1).toLowerCase()
     showGreeting(formattedUsername)
+    printCurrentWorkingDir(cwd())
 
     // listen to command
     rl.on('line', (input) => {
