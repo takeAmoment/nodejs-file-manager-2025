@@ -1,7 +1,7 @@
 import { platform } from 'os'
 import process from 'process'
 
-import { WINDOWS_PLATFORM } from '../constants/constants.js'
+import { ARGUMENTS_ERROR, COMMON_ERROR, WINDOWS_PLATFORM } from '../constants/constants.js'
 
 const getRootDir = () => {
   const isWindows = platform() === WINDOWS_PLATFORM
@@ -9,7 +9,12 @@ const getRootDir = () => {
   return isWindows ? `${process.cwd().charAt(0)}:\\` : '/'
 }
 
-export const goUpper = () => {
+export const goUpper = (commandArgs) => {
+  if(commandArgs.length > 0) {
+    console.error(`${COMMON_ERROR} ${ARGUMENTS_ERROR}`)
+    return
+  }
+
   const rootDir = getRootDir()
   const currentDir = process.cwd()
 

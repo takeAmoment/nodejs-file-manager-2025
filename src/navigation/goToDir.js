@@ -5,6 +5,7 @@ import { ARGUMENTS_ERROR, COMMON_ERROR, INVALID_INPUT_ERROR, NO_FILE_CODE_ERROR 
 export const goToDir = (commandArgs) => {
   if(commandArgs.length !== 1) {
     console.error(`${INVALID_INPUT_ERROR} ${ARGUMENTS_ERROR}`)
+    return
   }
 
   try {
