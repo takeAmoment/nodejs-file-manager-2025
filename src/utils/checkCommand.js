@@ -1,9 +1,11 @@
 import { goToDir } from "../navigation/goToDir.js"
 import { goUpper } from "../navigation/goUpper.js"
+import { printFilesList } from "../navigation/printFilesList.js"
 
 export const COMMANDS = {
   'up': goUpper,
-  'cd': goToDir
+  'cd': goToDir,
+  'ls': printFilesList
 }
 
 const parseCommand = (data) => {
