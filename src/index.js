@@ -2,18 +2,23 @@ import { argv, stdin, stdout, cwd } from 'process'
 import readline from 'readline'
 import os from 'os'
 
-import { USERNAME_PREFIX, USERNAME_ERROR, COMMON_ERROR } from './constants/constants.js'
+import {
+  USERNAME_PREFIX,
+  USERNAME_ERROR,
+  COMMON_ERROR
+} from './constants/constants.js'
 import { showGreeting } from './utils/showGreeting.js'
 import { showFarewellPhrase } from './utils/showFarewellPhrase.js'
 import { printCurrentWorkingDir } from './utils/printCurrentWrkingDir.js'
+import { checkCommand } from './utils/checkCommand.js'
 
 const rl = readline.createInterface({
   input: stdin,
   output: stdout
 })
 
-const homeDir = os.homedir();
-process.chdir(homeDir);
+const homeDir = os.homedir()
+process.chdir(homeDir)
 
 const closeProcess = (username) => {
   showFarewellPhrase(username)
@@ -24,20 +29,25 @@ const handleCommand = (data, userName) => {
 
   if (formatedData === '.exit') {
     rl.close()
+  } else {
+    checkCommand(formatedData)
   }
   printCurrentWorkingDir(cwd())
 }
 
-
 const startProgram = () => {
   try {
-    const username = argv.find(item => item.startsWith(USERNAME_PREFIX))?.split('=')[1]?.trim()
+    const username = argv
+      .find((item) => item.startsWith(USERNAME_PREFIX))
+      ?.split('=')[1]
+      ?.trim()
 
-    if(!username) {
+    if (!username) {
       throw new Error(USERNAME_ERROR)
     }
 
-    const formattedUsername = username.slice(0, 1).toUpperCase() + username.slice(1).toLowerCase()
+    const formattedUsername =
+      username.slice(0, 1).toUpperCase() + username.slice(1).toLowerCase()
     showGreeting(formattedUsername)
     printCurrentWorkingDir(cwd())
 
@@ -49,7 +59,6 @@ const startProgram = () => {
     rl.on('close', () => {
       closeProcess(formattedUsername)
     })
-    
   } catch (error) {
     throw new Error(`${COMMON_ERROR} Detailed info: ${error.message}`)
   }
