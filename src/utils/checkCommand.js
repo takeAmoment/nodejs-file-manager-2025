@@ -1,7 +1,9 @@
+import { goToDir } from "../navigation/goToDir.js"
 import { goUpper } from "../navigation/goUpper.js"
 
 export const COMMANDS = {
-  'up': goUpper
+  'up': goUpper,
+  'cd': goToDir
 }
 
 const parseCommand = (data) => {
