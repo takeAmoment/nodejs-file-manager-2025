@@ -6,6 +6,7 @@ import { addFile } from "../fs/addFile.js"
 import { makeDir } from "../fs/makeDir.js"
 import { renameFile } from "../fs/renameFile.js"
 import { copyFile } from "../fs/copyFile.js"
+import { deleteFile } from "../fs/deleteFile.js"
 
 export const COMMANDS = {
   'up': goUpper,
@@ -15,7 +16,8 @@ export const COMMANDS = {
   'add': addFile,
   'mkdir': makeDir,
   'rn': renameFile,
-  'cp': copyFile
+  'cp': copyFile.apply,
+  'rm': deleteFile
 }
 
 const parseCommand = (data) => {
