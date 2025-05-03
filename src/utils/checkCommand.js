@@ -4,6 +4,7 @@ import { printFilesList } from "../navigation/printFilesList.js"
 import { readFile } from '../fs/readFile.js'
 import { addFile } from "../fs/addFile.js"
 import { makeDir } from "../fs/makeDir.js"
+import { renameFile } from "../fs/renameFile.js"
 
 export const COMMANDS = {
   'up': goUpper,
@@ -11,7 +12,8 @@ export const COMMANDS = {
   'ls': printFilesList,
   'cat': readFile,
   'add': addFile,
-  'mkdir': makeDir
+  'mkdir': makeDir,
+  'rn': renameFile
 }
 
 const parseCommand = (data) => {
