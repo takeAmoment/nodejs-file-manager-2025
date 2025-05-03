@@ -8,6 +8,7 @@ import { renameFile } from "../fs/renameFile.js"
 import { copyFile } from "../fs/copyFile.js"
 import { deleteFile } from "../fs/deleteFile.js"
 import { moveFile } from "../fs/moveFile.js"
+import { printOsInfo } from "../os/printOsInfo.js"
 
 export const COMMANDS = {
   'up': goUpper,
@@ -19,7 +20,8 @@ export const COMMANDS = {
   'rn': renameFile,
   'cp': copyFile.apply,
   'rm': deleteFile,
-  'mv': moveFile
+  'mv': moveFile,
+  'os': printOsInfo
 }
 
 const parseCommand = (data) => {
