@@ -10,6 +10,8 @@ import { deleteFile } from "../fs/deleteFile.js"
 import { moveFile } from "../fs/moveFile.js"
 import { printOsInfo } from "../os/printOsInfo.js"
 import { calculateHash } from "../hash/calculateHash.js"
+import { compressFile } from "../zlib/compressFile.js"
+import { decompressFile } from "../zlib/decompressFile.js"
 
 export const COMMANDS = {
   'up': goUpper,
@@ -23,7 +25,9 @@ export const COMMANDS = {
   'rm': deleteFile,
   'mv': moveFile,
   'os': printOsInfo,
-  'hash': calculateHash
+  'hash': calculateHash,
+  'compress': compressFile,
+  'decompress': decompressFile
 }
 
 const parseCommand = (data) => {
