@@ -3,7 +3,7 @@ import { rm } from 'fs/promises'
 
 import { resolvePathToDir } from '../utils/resolvePathToDir.js'
 import { checkIsExistingFile } from '../utils/checkIsExistingFile.js'
-import { COMMON_ERROR } from '../constants/constants.js'
+import { COMMON_ERROR, INVALID_INPUT_ERROR, ARGUMENTS_ERROR, MISSING_FILE_ERROR } from '../constants/constants.js'
 
 export const deleteFile = async (commandArgs) => {
   if (commandArgs.length !== 1) {
@@ -13,11 +13,10 @@ export const deleteFile = async (commandArgs) => {
 
   const currentDir = process.cwd()
   const filePath = resolvePathToDir(currentDir, commandArgs[0])
-  console.log('path:', filePath)
 
   try {
     const isExistingFile = await checkIsExistingFile(filePath)
-    if (!isExistingFile) throw new Error('Source file does not exist.')
+    if (!isExistingFile) throw new Error(MISSING_FILE_ERROR)
 
     await rm(filePath)
   } catch (error) {
