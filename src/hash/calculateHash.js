@@ -2,7 +2,7 @@ import process from 'process'
 import { createReadStream } from 'fs'
 import { createHash } from 'crypto'
 
-import { ARGUMENTS_ERROR, COMMON_ERROR, INVALID_INPUT_ERROR } from "../constants/constants.js"
+import { ARGUMENTS_ERROR, COMMON_ERROR, INVALID_INPUT_ERROR, MISSING_FILE_ERROR } from "../constants/constants.js"
 import { resolvePathToDir } from "../utils/resolvePathToDir.js"
 import { checkIsExistingFile } from '../utils/checkIsExistingFile.js'
 
@@ -17,9 +17,9 @@ export const calculateHash = async (commandArgs) => {
 
   try {
     const isExistingFile = await checkIsExistingFile(filePath)
-    if(!isExistingFile) throw new Error('File does not exist')
+    if(!isExistingFile) throw new Error(MISSING_FILE_ERROR)
 
-    const readableStream = createReadStream(filePath, { encoding: 'utf-8'})
+    const readableStream = createReadStream(filePath)
     const hash = createHash('sha256')
 
     readableStream.on('data', (data) => hash.update(data))
