@@ -1,0 +1,1 @@
+export const showGreeting = (username) => console.log(`Welcome to the File Manager, ${username}!`)

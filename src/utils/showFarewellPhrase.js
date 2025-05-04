@@ -1,0 +1,1 @@
+export const showFarewellPhrase = (username) => console.log(`Thank you for using File Manager, ${username}, goodbye!`) 
