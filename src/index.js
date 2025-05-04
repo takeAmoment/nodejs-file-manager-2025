@@ -5,7 +5,7 @@ import os from 'os'
 import {
   USERNAME_PREFIX,
   USERNAME_ERROR,
-  COMMON_ERROR
+  INVALID_INPUT_ERROR
 } from './constants/constants.js'
 import { showGreeting } from './utils/showGreeting.js'
 import { showFarewellPhrase } from './utils/showFarewellPhrase.js'
@@ -20,11 +20,7 @@ const rl = readline.createInterface({
 const homeDir = os.homedir()
 process.chdir(homeDir)
 
-const closeProcess = (username) => {
-  showFarewellPhrase(username)
-}
-
-const handleCommand = (data, userName) => {
+const handleCommand = (data) => {
   const formatedData = data.toString().trim().replace(/\s+/g, ' ')
 
   if (formatedData === '.exit') {
@@ -49,6 +45,7 @@ const startProgram = () => {
     const formattedUsername =
       username.slice(0, 1).toUpperCase() + username.slice(1).toLowerCase()
     showGreeting(formattedUsername)
+
     printCurrentWorkingDir(cwd())
 
     // listen to command
@@ -57,10 +54,12 @@ const startProgram = () => {
     })
 
     rl.on('close', () => {
-      closeProcess(formattedUsername)
+      showFarewellPhrase(username)
     })
+    
   } catch (error) {
-    throw new Error(`${COMMON_ERROR} Detailed info: ${error.message}`)
+    console.error(`${INVALID_INPUT_ERROR} ${error.message}`)
+    rl.close()
   }
 }
 
