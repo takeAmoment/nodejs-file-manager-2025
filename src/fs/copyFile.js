@@ -33,8 +33,10 @@ export const copyFile = async (commandArgs) => {
     const writableStream = createWriteStream(destinationFilePath)
 
     await pipeline(readableStream, writableStream)
+    return true
   } catch (error) {
     console.error(`${COMMON_ERROR} ${error.message}`)
+    return false
   }
 }
 
