@@ -6,14 +6,14 @@ import { basename, join } from 'path'
 
 import { checkIsExistingFile } from '../utils/checkIsExistingFile.js'
 import { resolvePathToDir } from '../utils/resolvePathToDir.js'
-import { COMMON_ERROR } from '../constants/constants.js'
+import { COMMON_ERROR, MISSING_FILE_ERROR, NO_FILE_CODE_ERROR } from '../constants/constants.js'
 
 const checkIsFile = async (filePath) => {
   try {
     const stats = await stat(filePath)
     return stats.isFile()
   } catch (error) {
-    return error.code === 'ENOENT'
+    return error.code === NO_FILE_CODE_ERROR
   }
 }
 
@@ -29,7 +29,7 @@ export const handleZlibCommand = async (sourceFile, destinationFile, gzip, isCom
 
   try {
     const isExistingFile = await checkIsExistingFile(sourceFilePath)
-    if (!isExistingFile) throw new Error('File does not exist')
+    if (!isExistingFile) throw new Error(MISSING_FILE_ERROR)
 
     const readableStream = createReadStream(sourceFilePath)
     const writableStream = createWriteStream(destinationFilePath)
