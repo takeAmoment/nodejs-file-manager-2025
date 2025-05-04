@@ -41,7 +41,6 @@ const parseCommand = (data) => {
 
 export const checkCommand = (data) => {
   const { command, commandArgs } = parseCommand(data)
-  console.log('Command', command, commandArgs)
 
   if(COMMANDS.hasOwnProperty(command)) {
     COMMANDS[command](commandArgs)
