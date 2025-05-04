@@ -4,7 +4,7 @@ import { dirname } from 'path'
 
 import { resolvePathToDir } from '../utils/resolvePathToDir.js'
 import { checkIsExistingFile } from '../utils/checkIsExistingFile.js'
-import { COMMON_ERROR, INVALID_INPUT_ERROR } from '../constants/constants.js'
+import { COMMON_ERROR, INVALID_INPUT_ERROR, ARGUMENTS_ERROR } from '../constants/constants.js'
 
 export const renameFile = async (commandArgs) => {
   if (commandArgs.length !== 2) {
