@@ -1,7 +1,7 @@
 import { platform } from 'os'
 import process from 'process'
 
-import { ARGUMENTS_ERROR, COMMON_ERROR, WINDOWS_PLATFORM } from '../constants/constants.js'
+import { ARGUMENTS_ERROR, INVALID_INPUT_ERROR, WINDOWS_PLATFORM } from '../constants/constants.js'
 
 const getRootDir = () => {
   const isWindows = platform() === WINDOWS_PLATFORM
@@ -11,7 +11,7 @@ const getRootDir = () => {
 
 export const goUpper = (commandArgs) => {
   if(commandArgs.length > 0) {
-    console.error(`${COMMON_ERROR} ${ARGUMENTS_ERROR}`)
+    console.error(`${INVALID_INPUT_ERROR} ${ARGUMENTS_ERROR}`)
     return
   }
 

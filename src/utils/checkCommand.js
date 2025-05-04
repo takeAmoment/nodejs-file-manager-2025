@@ -12,6 +12,7 @@ import { printOsInfo } from "../os/printOsInfo.js"
 import { calculateHash } from "../hash/calculateHash.js"
 import { compressFile } from "../zlib/compressFile.js"
 import { decompressFile } from "../zlib/decompressFile.js"
+import { COMMAND_ERROR, INVALID_INPUT_ERROR } from "../constants/constants.js"
 
 export const COMMANDS = {
   'up': goUpper,
@@ -45,7 +46,7 @@ export const checkCommand = (data) => {
   if(COMMANDS.hasOwnProperty(command)) {
     COMMANDS[command](commandArgs)
   } else {
-    console.error('Invalid input.')
+    console.error(`${INVALID_INPUT_ERROR} ${COMMAND_ERROR}`)
   }
 
 }

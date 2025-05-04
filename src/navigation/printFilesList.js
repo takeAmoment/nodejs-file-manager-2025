@@ -11,6 +11,7 @@ const createObj = (name, type) => ({
 export const printFilesList = async (commandArgs) => {
   if(commandArgs.length > 0) {
     console.error(`${INVALID_INPUT_ERROR} ${ARGUMENTS_ERROR}`)
+    return
   }
 
   try {

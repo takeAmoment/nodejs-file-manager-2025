@@ -1,6 +1,6 @@
 import { chdir } from 'process'
 
-import { ARGUMENTS_ERROR, COMMON_ERROR, INVALID_INPUT_ERROR, NO_FILE_CODE_ERROR } from "../constants/constants.js"
+import { ARGUMENTS_ERROR, COMMON_ERROR, INVALID_INPUT_ERROR } from "../constants/constants.js"
 
 export const goToDir = (commandArgs) => {
   if(commandArgs.length !== 1) {
