@@ -1,6 +1,6 @@
 import { mkdir } from 'fs/promises'
 
-import { COMMON_ERROR } from '../constants/constants.js'
+import { COMMON_ERROR, INVALID_INPUT_ERROR, ARGUMENTS_ERROR } from '../constants/constants.js'
 import { resolvePathToDir } from '../utils/resolvePathToDir.js'
 
 export const makeDir = async(commandArgs) => {
