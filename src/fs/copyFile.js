@@ -3,7 +3,7 @@ import { basename, join } from 'path'
 import { createReadStream, createWriteStream } from 'fs'
 import { pipeline } from 'stream/promises'
 
-import { COMMON_ERROR, INVALID_INPUT_ERROR } from '../constants/constants.js'
+import { COMMON_ERROR, INVALID_INPUT_ERROR, ARGUMENTS_ERROR } from '../constants/constants.js'
 import { resolvePathToDir } from '../utils/resolvePathToDir.js'
 import { checkIsExistingFile } from '../utils/checkIsExistingFile.js'
 
@@ -29,7 +29,7 @@ export const copyFile = async (commandArgs) => {
     const isDestExists = await checkIsExistingFile(destinationFilePath)
     if (isDestExists) throw new Error('File in new path already exists.')
 
-    const readableStream = createReadStream(sourceFilePath, { encoding: 'utf-8'})
+    const readableStream = createReadStream(sourceFilePath)
     const writableStream = createWriteStream(destinationFilePath)
 
     await pipeline(readableStream, writableStream)

@@ -22,7 +22,7 @@ export const COMMANDS = {
   'add': addFile,
   'mkdir': makeDir,
   'rn': renameFile,
-  'cp': copyFile.apply,
+  'cp': copyFile,
   'rm': deleteFile,
   'mv': moveFile,
   'os': printOsInfo,
